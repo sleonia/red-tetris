@@ -21,7 +21,10 @@
             "node_modules/@types",
             "@types"
         ],
-        "resolveJsonModule": true
+        "resolveJsonModule": true,
+        "forceConsistentCasingInFileNames": true,
+        "noEmit": true,
+        "incremental": true
     },
     "include": [
         "next-env.d.ts",
@@ -39,7 +42,7 @@
         "files": true,
         "compilerOptions": {
             "target": "esnext",
-            "module": "commonjs",
+            "module": "commonjs"
         }
     }
 }
