@@ -3,17 +3,22 @@ import {
     Navbar,
     Header as MantineHeader,
     Footer,
+    ActionIcon,
     Aside,
     Text,
     MediaQuery,
     Burger,
     useMantineTheme
 } from '@mantine/core'
-
+// import Sun from 'tabler-icons-react/dist/icons/sun'
+import { useTranslation } from 'next-i18next';
 import { useTheme } from '../hooks'
 
 export const Header = () => {
-    useTheme()
+    // useTheme()
+    const { t, ...rest } = useTranslation('common');
+    console.log('🚀 ~ file: header.tsx ~ line 20 ~ Header ~ t', t)
+    console.log('🚀 ~ file: header.tsx ~ line 20 ~ Header ~ useTranslation', rest)
 
     return (
         <MantineHeader height={70} p="md">
@@ -28,8 +33,8 @@ export const Header = () => {
                         mr="xl"
                     />
                 </MediaQuery>
-
-                <Text>Application header</Text>
+                <ActionIcon />
+                <Text>{t('hello')}</Text>
             </div>
         </MantineHeader>
     )

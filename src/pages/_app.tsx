@@ -3,6 +3,7 @@ import Head from 'next/head'
 import { MantineProvider, ColorSchemeProvider } from '@mantine/core'
 import type { ColorScheme } from '@mantine/core'
 import { useState } from 'react'
+import { appWithTranslation } from 'next-i18next';
 
 import { Header } from '../components'
 
@@ -31,4 +32,4 @@ const Root = ({ Component, pageProps }: AppProps) => {
     )
 }
 
-export default Root
+export default appWithTranslation(Root)

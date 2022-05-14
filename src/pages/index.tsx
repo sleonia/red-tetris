@@ -9,6 +9,7 @@ import {
     Burger,
     useMantineTheme
 } from '@mantine/core'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 import { Header } from '../components'
 
@@ -51,3 +52,9 @@ export default function AppShellDemo (...rest) {
         </AppShell>
     )
 }
+
+export const getStaticProps = async ({ locale }) => ({
+    props: {
+        ...await serverSideTranslations(locale, ['common'])
+    }
+})
