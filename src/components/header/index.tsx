@@ -23,7 +23,7 @@ export const Header = ({ opened, setOpened }: HeaderProps) => {
 
     return (
         <MantineHeader height={70} p="md">
-            <div style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
+            <div style={{ display: 'flex', alignItems: 'center', height: '100%', justifyContent: 'space-between' }}>
                 <MediaQuery largerThan="sm" styles={{ display: 'none' }}>
                     <Burger
                         opened={opened}
@@ -36,7 +36,10 @@ export const Header = ({ opened, setOpened }: HeaderProps) => {
                     onClick={() => toggleColorScheme()}
                     title={t('theme-switch', { colorScheme: capitalize(colorScheme) })}
                 >
-                    {colorScheme === THEMES.dark ? <Sun size={36} /> : <MoonStars size={36} />}
+                    {colorScheme === THEMES.dark
+                        ? <Sun strokeWidth={1} size={36} />
+                        : <MoonStars strokeWidth={1} size={36} />
+                    }
                 </ActionIcon>
             </div>
         </MantineHeader>

@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import { AppShell, Footer, useMantineTheme } from '@mantine/core'
+import { AppShell, Aside, MediaQuery, useMantineTheme, Text } from '@mantine/core'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
-import { Header } from '../components'
+import { Header, Footer } from '../components'
+import { THEMES } from '../constants'
 
 export default function AppShellDemo(...rest) {
     const theme = useMantineTheme()
@@ -14,16 +15,21 @@ export default function AppShellDemo(...rest) {
         <AppShell
             styles={{
                 main: {
-                    background: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[0]
+                    height: '100vh',
+                    background: theme.colorScheme ===  THEMES.dark ? theme.colors.dark[8] : theme.colors.gray[0]
                 }
             }}
-            fixed
-            footer={
-                <Footer height={60} p="md">
-                    Application footer
-                </Footer>
-            }
+            // fixed
+            asideOffsetBreakpoint="sm"
             header={<Header opened={opened} setOpened={handleOpened} />}
+            aside={
+                <MediaQuery smallerThan="sm" styles={{ display: 'none' }}>
+                    <Aside p="md" hiddenBreakpoint="sm" width={{ sm: 200, lg: 300 }}>
+                        <Text>Application sidebar</Text>
+                    </Aside>
+                </MediaQuery>
+            }
+            footer={<Footer />}
         >
             {/* FIXME какой-то костыль */}
             {rest[0]?.children}
