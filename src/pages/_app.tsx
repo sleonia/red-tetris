@@ -1,33 +1,25 @@
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
-import { MantineProvider, ColorSchemeProvider } from '@mantine/core'
-import type { ColorScheme } from '@mantine/core'
-import { useState } from 'react'
-import { appWithTranslation } from 'next-i18next';
+import { Global } from '@mantine/core'
+import { appWithTranslation, useTranslation } from 'next-i18next'
 
-import { Header } from '../components'
+import { ThemeWrapper } from '../components'
+
+import { GlobalStyles } from './index.styles'
 
 const Root = ({ Component, pageProps }: AppProps) => {
-    const [colorScheme, setColorScheme] = useState<ColorScheme>('light')
-    const toggleColorScheme = (value: ColorScheme) => setColorScheme(value)
+    const { t } = useTranslation('common')
 
     return (
         <div>
             <Head>
-                <title>Red tetris</title>
-                <link rel="icon" href="red-tetris.ico" />
+                <title>{t('title')}</title>
+                <link rel="icon" href="/red-tetris.ico" />
             </Head>
-            <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
-                <MantineProvider
-                    withGlobalStyles
-                    withNormalizeCSS
-                    theme={{ colorScheme }}
-                >
-                    <Component {...pageProps}>
-                        <Header />
-                    </Component>
-                </MantineProvider>
-            </ColorSchemeProvider>
+            <ThemeWrapper>
+                <Global styles={GlobalStyles} />
+                <Component {...pageProps} />
+            </ThemeWrapper>
         </div>
     )
 }
