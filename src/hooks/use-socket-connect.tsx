@@ -5,13 +5,19 @@ import CircleCheck from 'tabler-icons-react/dist/icons/circle-check'
 import AlertCircle from 'tabler-icons-react/dist/icons/alert-circle'
 
 import { useSocket } from '../context'
+import { useAppDispatch } from '../__data__'
+import { setUserId } from '../__data__/slices'
 
 export const useSocketConnect = () => {
     const { t } = useTranslation()
     const socket = useSocket()
+    const dispatch = useAppDispatch()
     const [state, setState] = useState<'connect' | 'disconnect' | null>(null)
 
-    socket.on('connect', () => setState('connect'))
+    socket.on('connect', () => {
+        dispatch(setUserId(socket.id))
+        setState('connect')
+    })
 
     socket.on('disconnect', () => setState('disconnect'))
 
