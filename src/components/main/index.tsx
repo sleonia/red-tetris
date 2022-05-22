@@ -8,9 +8,9 @@ import {
 import { useTranslation } from 'next-i18next'
 import { useState } from 'react'
 
-import type { AppShellComponentsProps } from '../../components/types'
+import type { AppShellComponentsProps } from '../types'
 
-import { EnterRoomModal } from './modals'
+import { EnterRoomModal } from '../modals'
 import {
     useMainStyles,
     smallerSmPaper,

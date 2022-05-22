@@ -2,8 +2,15 @@
     "title": "Red tetris",
     "logo.alt": "Red tetris logo",
     "theme-switch": "{{colorScheme}} mode",
+
     "navbar.link.home": "Home",
     "navbar.link.game": "Game",
+
+    "notification.disconnect.title": "You are disconnected!",
+    "notification.disconnect.message": "Try to refresh page or check your network connection",
+
+    "notification.connect.title": "You are connected!",
+
     "main.solo-game": "New solo game",
     "main.collaborative-game": "New collaborative game",
     "main.create-new-game": "Create new room",
@@ -13,9 +20,11 @@
     "main.modal.action-icon.copy": "Copy id",
     "main.modal.submit-button": "Join",
     "main.modal.error-room": "Room with this id doesn't exist",
+
     "footer.description": "Best tetris game ever",
     "footer.build-by": "Built by Nikita Dontsov",
-    "github.me.link": "https://github.com/sleonia",
     "footer.follow-me-github": "Follow on Github",
-    "footer.follow-me-github-link": "https://github.com/sleonia/red-tetris"
+    "footer.follow-me-github-link": "https://github.com/sleonia/red-tetris",
+
+    "github.me.link": "https://github.com/sleonia"
 }

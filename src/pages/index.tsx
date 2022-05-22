@@ -4,11 +4,14 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 import { Header, Navbar, Footer } from '../components'
 import { THEMES } from '../constants'
-
-import { Main } from './main'
+import { useSocketConnect } from '../hooks'
+import { useSocket } from '../context'
+import { Main } from '../components/main'
 
 export default function App () {
     const theme = useMantineTheme()
+    const handler = useSocketConnect()
+    const socket = useSocket()
 
     const [opened, setOpened] = useState(false)
 
@@ -32,6 +35,7 @@ export default function App () {
             footer={<Footer />}
         >
             <Main opened={opened} />
+            <button onClick={handler}>socket.active: {`${socket.active}`} {`${socket.connected}`}</button>
         </AppShell>
     )
 }

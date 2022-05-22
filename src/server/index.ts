@@ -23,8 +23,20 @@ const io = new Server<ServerToClientEvents, ClientToServerEvents>(server, {
 io.on('connect', (socket) => {
     console.log('A user connected', socket.id)
 
-    socket.on('roomCheck', (arg) => {
-        socket.emit('joinRoom', socket.rooms.has(arg))
+    socket.on('disconnect', () => {
+        console.log('A user disconnected')
+    })
+
+    socket.on('roomCheck', (roomId) => {
+        socket.emit('joinRoom', socket.rooms.has(roomId))
+    })
+
+    socket.on('roomCreate', (roomId) => {
+        if (socket.rooms.has(roomId)) {
+            socket.emit('joinRoom', socket.rooms.has(roomId))
+        } else {
+            socket.join(roomId)
+        }
     })
 })
 

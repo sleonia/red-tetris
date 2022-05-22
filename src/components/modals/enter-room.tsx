@@ -7,8 +7,8 @@ import Router from 'next/router'
 import Copy from 'tabler-icons-react/dist/icons/copy'
 import CopyOff from 'tabler-icons-react/dist/icons/copy-off'
 
-import { change } from '../../../__data__/slices'
-import { useAppDispatch, useAppSelector, socket } from '../../../__data__'
+import { change } from '../../__data__/slices'
+import { useAppDispatch, useAppSelector, socket } from '../../__data__'
 
 import type { ModalsProps } from './types'
 

@@ -1,13 +1,22 @@
 import type { AppProps } from 'next/app'
 import Head from 'next/head'
 import { Global } from '@mantine/core'
+import { NotificationsProvider } from '@mantine/notifications'
 import { appWithTranslation, useTranslation } from 'next-i18next'
 import { Provider } from 'react-redux'
+import type { CSSObject } from '@emotion/react'
 
-import { store, wrapper } from '../__data__/store'
+import { store, wrapper, socket } from '../__data__'
 import { ThemeWrapper } from '../components'
+import { SocketContext } from '../context'
 
-import { GlobalStyles } from './index.styles'
+const GlobalStyles: CSSObject = {
+    '*, *::before, *::after': {
+        boxSizing: 'border-box',
+        margin: 0,
+        padding: 0
+    }
+}
 
 const Root = ({ Component, pageProps }: AppProps) => {
     const { t } = useTranslation()
@@ -21,7 +30,11 @@ const Root = ({ Component, pageProps }: AppProps) => {
                 </Head>
                 <ThemeWrapper>
                     <Global styles={GlobalStyles} />
-                    <Component {...pageProps} />
+                    <SocketContext.Provider value={socket}>
+                        <NotificationsProvider>
+                            <Component {...pageProps} />
+                        </NotificationsProvider>
+                    </SocketContext.Provider>
                 </ThemeWrapper>
             </div>
         </Provider>
