@@ -8,10 +8,10 @@ import {
     ClientToServerEvents
 } from './../__data__/socket-events'
 
+
+const port = parseInt(process.env.PORT || '4000', 10)
+
 const app = express()
-
-const port = process.env.PORT || 4000
-
 const server = http.createServer(app)
 
 const io = new Server<ServerToClientEvents, ClientToServerEvents>(server, {
@@ -21,11 +21,7 @@ const io = new Server<ServerToClientEvents, ClientToServerEvents>(server, {
 })
 
 io.on('connect', (socket) => {
-    console.log('A user connected', socket.id)
-
-    socket.on('disconnect', () => {
-        console.log('A user disconnected')
-    })
+    console.log('A user connected', socket.rooms)
 
     socket.on('roomCheck', (roomId) => {
         socket.emit('joinRoom', socket.rooms.has(roomId))
@@ -37,6 +33,10 @@ io.on('connect', (socket) => {
         } else {
             socket.join(roomId)
         }
+    })
+
+    socket.on('disconnect', () => {
+        console.log('A user disconnected')
     })
 })
 

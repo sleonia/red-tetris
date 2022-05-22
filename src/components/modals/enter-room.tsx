@@ -8,7 +8,8 @@ import Copy from 'tabler-icons-react/dist/icons/copy'
 import CopyOff from 'tabler-icons-react/dist/icons/copy-off'
 
 import { change } from '../../__data__/slices'
-import { useAppDispatch, useAppSelector, socket } from '../../__data__'
+import { useAppDispatch, useAppSelector } from '../../__data__'
+import { useSocket } from '../../context'
 
 import type { ModalsProps } from './types'
 
@@ -18,10 +19,13 @@ export const EnterRoomModal = ({ opened, onClose }: ModalsProps) => {
     const [toggle, setToogle] = useState(false)
     const [error, setError] = useState(false)
 
+    const socket = useSocket()
+
     const { t } = useTranslation()
     const clipboard = useClipboard({ timeout: 500 })
 
     useEffect(() => {
+        console.log('🚀 ~ file: enter-room.tsx ~ line 26 ~ useEffect ~ toggle', toggle, socket)
         if (toggle) {
             socket.on('joinRoom', (arg) => {
                 if (!arg) {
@@ -44,6 +48,7 @@ export const EnterRoomModal = ({ opened, onClose }: ModalsProps) => {
     const handleClick: MouseEventHandler<HTMLButtonElement> = useCallback((event) => {
         event.preventDefault()
         socket.emit('roomCheck', roomId.value)
+        console.log('🚀 ~ file: enter-room.tsx ~ line 48 ~ consthandleClick:MouseEventHandler<HTMLButtonElement>=useCallback ~ socket', socket)
         setToogle(true)
     }, [roomId.value])
 
