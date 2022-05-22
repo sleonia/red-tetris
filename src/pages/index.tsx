@@ -1,12 +1,13 @@
-import React, { useState } from 'react'
-import { AppShell, Aside, MediaQuery, useMantineTheme, Text } from '@mantine/core'
+import { useState } from 'react'
+import { useMantineTheme, AppShell } from '@mantine/core'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
-import { Header, Footer } from '../components'
+import { Header, Navbar, Footer } from '../components'
 import { THEMES } from '../constants'
 
-export default function AppShellDemo(...rest) {
+export default function App () {
     const theme = useMantineTheme()
+
     const [opened, setOpened] = useState(false)
 
     const handleOpened = () => setOpened(!opened)
@@ -16,23 +17,14 @@ export default function AppShellDemo(...rest) {
             styles={{
                 main: {
                     height: '100vh',
-                    background: theme.colorScheme ===  THEMES.dark ? theme.colors.dark[8] : theme.colors.gray[0]
+                    background: theme.colorScheme === THEMES.dark ? theme.colors.dark[8] : theme.colors.gray[0]
                 }
             }}
-            // fixed
             asideOffsetBreakpoint="sm"
             header={<Header opened={opened} setOpened={handleOpened} />}
-            aside={
-                <MediaQuery smallerThan="sm" styles={{ display: 'none' }}>
-                    <Aside p="md" hiddenBreakpoint="sm" width={{ sm: 200, lg: 300 }}>
-                        <Text>Application sidebar</Text>
-                    </Aside>
-                </MediaQuery>
-            }
+            navbar={<Navbar opened={opened} />}
             footer={<Footer />}
         >
-            {/* FIXME какой-то костыль */}
-            {rest[0]?.children}
         </AppShell>
     )
 }

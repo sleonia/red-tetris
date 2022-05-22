@@ -2,6 +2,8 @@
     "title": "Red tetris",
     "logo.alt": "Red tetris logo",
     "theme-switch": "{{colorScheme}} mode",
+    "navbar.link.home": "Home",
+    "navbar.link.game": "Game",
     "footer.description": "Best tetris game ever",
     "footer.build-by": "Built by Nikita Dontsov",
     "github.me.link": "https://github.com/sleonia",

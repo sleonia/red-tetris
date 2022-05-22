@@ -11,15 +11,11 @@ import { useTranslation } from 'next-i18next'
 
 import { capitalize } from '../../utils'
 import { THEMES } from '../../constants'
+import type { AppShellComponentsProps } from '../types'
 
-export type HeaderProps = {
-    opened: boolean
-    setOpened: () => void
-}
-
-export const Header = ({ opened, setOpened }: HeaderProps) => {
+export const Header = ({ opened, setOpened }: AppShellComponentsProps) => {
     const { colorScheme, toggleColorScheme } = useMantineColorScheme()
-    const { t } = useTranslation('common')
+    const { t } = useTranslation()
 
     return (
         <MantineHeader height={70} p="md">
@@ -37,8 +33,8 @@ export const Header = ({ opened, setOpened }: HeaderProps) => {
                     title={t('theme-switch', { colorScheme: capitalize(colorScheme) })}
                 >
                     {colorScheme === THEMES.dark
-                        ? <Sun strokeWidth={1} size={36} />
-                        : <MoonStars strokeWidth={1} size={36} />
+                        ? <Sun strokeWidth={1.5} size={36} />
+                        : <MoonStars strokeWidth={1.5} size={36} />
                     }
                 </ActionIcon>
             </div>

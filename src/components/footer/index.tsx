@@ -1,5 +1,12 @@
 import { useTranslation } from 'next-i18next'
-import { Footer as MantineFooter, Stack, Container, Text, Divider, Group } from '@mantine/core'
+import {
+    Footer as MantineFooter,
+    Stack,
+    Container,
+    Text,
+    Divider,
+    Group
+} from '@mantine/core'
 
 import { ExternalLink } from '../external-link'
 import { Logo } from '../logo'
@@ -7,7 +14,8 @@ import { Logo } from '../logo'
 import { useFooterStyles } from './footer.style'
 
 export const Footer = () => {
-    const { t } = useTranslation('common')
+    const { t } = useTranslation()
+    // const { t } = useTranslation('common')
     const { classes } = useFooterStyles()
 
     return (

@@ -11,10 +11,8 @@ export const Logo = () => {
 
     return (
         <Group>
-            <Link
-                href="/"
-            >
-                <Anchor className={classes.logo}>
+            <Link href="/">
+                <Anchor tabIndex={0} className={classes.logo}>
                     <Image
                         src="/red-tetris.ico"
                         alt={t('logo.alt')}
