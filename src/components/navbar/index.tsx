@@ -20,7 +20,7 @@ export const Navbar = ({ opened }: Pick<AppShellComponentsProps, 'opened'>) => {
     return (
         <MantineNavbar p="md" hiddenBreakpoint="sm" hidden={!opened} width={{ sm: 200, lg: 200 }}>
             <Stack spacing="sm">
-                <Link href="/menu">
+                <Link href="/">
                     <Anchor tabIndex={0} className={classes.link}>
                         <Home strokeWidth={1.5} size={28} />
                         <Text size="xl" className={classes.text}>{t('navbar.link.home')}</Text>
