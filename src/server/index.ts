@@ -23,12 +23,12 @@ io.on('connect', (socket) => {
     console.log('A user connected', io.sockets.adapter.rooms)
 
     socket.on('roomCheck', (roomId) => {
-        socket.emit('joinRoom', socket.rooms.has(roomId))
+        socket.emit('joinRoom', io.sockets.adapter.rooms.has(roomId))
     })
 
     socket.on('roomCreate', (roomId) => {
-        if (socket.rooms.has(roomId)) {
-            socket.emit('joinRoom', socket.rooms.has(roomId))
+        if (io.sockets.adapter.rooms.has(roomId)) {
+            socket.emit('joinRoom', io.sockets.adapter.rooms.has(roomId))
         } else {
             socket.join(roomId)
         }
