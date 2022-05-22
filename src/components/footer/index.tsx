@@ -15,11 +15,10 @@ import { useFooterStyles } from './footer.style'
 
 export const Footer = () => {
     const { t } = useTranslation()
-    // const { t } = useTranslation('common')
     const { classes } = useFooterStyles()
 
     return (
-        <MantineFooter height={120} p="md">
+        <MantineFooter height={160} p="md">
             <Container>
                 <Stack spacing="sm">
                     <Group align="start" position="apart">

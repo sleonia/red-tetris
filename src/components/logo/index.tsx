@@ -7,7 +7,7 @@ import { useLogoStyles } from './logo.styles'
 
 export const Logo = () => {
     const { classes } = useLogoStyles()
-    const { t } = useTranslation('common')
+    const { t } = useTranslation()
 
     return (
         <Group>

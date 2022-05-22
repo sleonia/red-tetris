@@ -5,6 +5,8 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { Header, Navbar, Footer } from '../components'
 import { THEMES } from '../constants'
 
+import { Main } from './main'
+
 export default function App () {
     const theme = useMantineTheme()
 
@@ -17,7 +19,11 @@ export default function App () {
             styles={{
                 main: {
                     height: '100vh',
-                    background: theme.colorScheme === THEMES.dark ? theme.colors.dark[8] : theme.colors.gray[0]
+                    background: theme.colorScheme === THEMES.dark
+                        /* comment: get color */
+                        /* eslint-disable-next-line no-magic-numbers */
+                        ? theme.colors.dark[8]
+                        : theme.colors.gray[0]
                 }
             }}
             asideOffsetBreakpoint="sm"
@@ -25,6 +31,7 @@ export default function App () {
             navbar={<Navbar opened={opened} />}
             footer={<Footer />}
         >
+            <Main opened={opened} />
         </AppShell>
     )
 }

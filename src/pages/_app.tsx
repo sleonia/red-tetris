@@ -8,7 +8,7 @@ import { ThemeWrapper } from '../components'
 import { GlobalStyles } from './index.styles'
 
 const Root = ({ Component, pageProps }: AppProps) => {
-    const { t } = useTranslation('common')
+    const { t } = useTranslation()
 
     return (
         <div>
