@@ -3,13 +3,21 @@ import { useClipboard } from '@mantine/hooks'
 import { useTranslation } from 'next-i18next'
 import Copy from 'tabler-icons-react/dist/icons/copy'
 import CopyOff from 'tabler-icons-react/dist/icons/copy-off'
+import { useSelector, useDispatch } from 'react-redux'
 
 import type { ModalsProps } from './types'
+
+import { increment, decrement, incrementByAmount } from '../../../__data__/counter'
 
 export const EnterRoomModal = ({ opened, onClose }: ModalsProps) => {
     const { t } = useTranslation()
     const clipboard = useClipboard({ timeout: 500 })
 
+
+
+
+    const count = useSelector((state) => state.counter.value)
+    const dispatch = useDispatch()
 
     return (
         <Modal
@@ -29,6 +37,21 @@ export const EnterRoomModal = ({ opened, onClose }: ModalsProps) => {
                     </ActionIcon>
                 )}
             />
+            <div>
+                <button
+                    aria-label="Increment value"
+                    onClick={() => dispatch(increment())}
+                >
+                    Increment
+                </button>
+                <span>{count}</span>
+                <button
+                    aria-label="Decrement value"
+                    onClick={() => dispatch(decrement())}
+                >
+                    Decrement
+                </button>
+            </div>
         </Modal>
     )
 }
