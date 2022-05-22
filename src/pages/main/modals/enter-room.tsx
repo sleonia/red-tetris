@@ -3,6 +3,7 @@ import type { ChangeEventHandler, MouseEventHandler } from 'react'
 import { Modal, TextInput, ActionIcon, Button, Stack } from '@mantine/core'
 import { useClipboard } from '@mantine/hooks'
 import { useTranslation } from 'next-i18next'
+import Router from 'next/router'
 import Copy from 'tabler-icons-react/dist/icons/copy'
 import CopyOff from 'tabler-icons-react/dist/icons/copy-off'
 
@@ -14,24 +15,24 @@ import type { ModalsProps } from './types'
 export const EnterRoomModal = ({ opened, onClose }: ModalsProps) => {
     const dispatch = useAppDispatch()
     const roomId = useAppSelector((state) => state.roomId)
-    const [value, setValue] = useState(false)
+    const [toggle, setToogle] = useState(false)
     const [error, setError] = useState(false)
 
     const { t } = useTranslation()
     const clipboard = useClipboard({ timeout: 500 })
 
     useEffect(() => {
-        if (value) {
+        if (toggle) {
             socket.on('joinRoom', (arg) => {
                 if (!arg) {
                     setError(true)
                 } else {
-                    alert(arg)
+                    Router.push('/game')
                 }
             })
-            setValue(false)
+            setToogle(false)
         }
-    }, [value])
+    }, [toggle])
 
     const handleChange: ChangeEventHandler<HTMLInputElement> = useCallback((event) => {
         if (error) {
@@ -43,7 +44,7 @@ export const EnterRoomModal = ({ opened, onClose }: ModalsProps) => {
     const handleClick: MouseEventHandler<HTMLButtonElement> = useCallback((event) => {
         event.preventDefault()
         socket.emit('roomCheck', roomId.value)
-        setValue(true)
+        setToogle(true)
     }, [roomId.value])
 
     return (

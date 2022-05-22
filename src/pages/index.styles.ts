@@ -1,4 +1,4 @@
-import type { CSSObject } from '@mantine/styles'
+import type { CSSObject } from '@emotion/react'
 
 export const GlobalStyles: CSSObject = {
     '*, *::before, *::after': {

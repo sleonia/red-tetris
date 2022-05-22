@@ -10,6 +10,8 @@ import {
 
 const app = express()
 
+const port = process.env.PORT || 4000
+
 const server = http.createServer(app)
 
 const io = new Server<ServerToClientEvents, ClientToServerEvents>(server, {
@@ -26,6 +28,6 @@ io.on('connect', (socket) => {
     })
 })
 
-server.listen(4000, () => {
-    console.log('listening on *:4000')
+server.listen(port, () => {
+    console.log(`🍌 Listening on PORT=${port} 🍌`)
 })
