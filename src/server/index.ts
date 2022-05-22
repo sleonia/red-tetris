@@ -27,6 +27,7 @@ io.on('connect', (socket) => {
     })
 
     socket.on('roomCreate', (roomId) => {
+        console.log('🚀 ~ file: index.ts ~ line 30 ~ socket.on ~ roomId', roomId)
         if (io.sockets.adapter.rooms.has(roomId)) {
             socket.emit('joinRoom', io.sockets.adapter.rooms.has(roomId))
         } else {

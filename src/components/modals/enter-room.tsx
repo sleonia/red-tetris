@@ -48,7 +48,7 @@ export const EnterRoomModal = ({ opened, onClose }: ModalsProps) => {
         event.preventDefault()
         socket.emit('roomCheck', roomId.value)
         setToogle(true)
-    }, [roomId.value])
+    }, [roomId.value, socket])
 
     return (
         <Modal
@@ -62,7 +62,7 @@ export const EnterRoomModal = ({ opened, onClose }: ModalsProps) => {
                     <TextInput
                         placeholder={t('main.modal.input.placeholder')}
                         value={roomId.value}
-                        error={error ? t('main.modal.error-room') : void 0}
+                        error={error ? t('main.modal.enter.error-room') : void 0}
                         onChange={handleChange}
                         rightSection={(
                             <ActionIcon
@@ -79,7 +79,7 @@ export const EnterRoomModal = ({ opened, onClose }: ModalsProps) => {
                         disabled={!roomId.value}
                         onClick={handleClick}
                     >
-                        {t('main.modal.submit-button')}
+                        {t('main.modal.enter.submit-button')}
                     </Button>
                 </Stack>
             </form>

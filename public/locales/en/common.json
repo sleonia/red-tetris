@@ -15,11 +15,14 @@
     "main.collaborative-game": "New collaborative game",
     "main.create-new-game": "Create new room",
     "main.enter-room": "Enter room",
+
     "main.modal.title": "Enter your room id",
     "main.modal.input.placeholder": "id",
     "main.modal.action-icon.copy": "Copy id",
-    "main.modal.submit-button": "Join",
-    "main.modal.error-room": "Room with this id doesn't exist",
+    "main.modal.enter.submit-button": "Join",
+    "main.modal.create.submit-button": "Create",
+    "main.modal.enter.error-room": "Room with this id doesn't exist",
+    "main.modal.create.error-room": "This room name has already taken",
 
     "footer.description": "Best tetris game ever",
     "footer.build-by": "Built by Nikita Dontsov",

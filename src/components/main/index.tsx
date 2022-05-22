@@ -9,7 +9,10 @@ import { useTranslation } from 'next-i18next'
 import { useState } from 'react'
 
 import type { AppShellComponentsProps } from '../types'
-import { EnterRoomModal } from '../modals'
+import {
+    CreateRoomModal,
+    EnterRoomModal
+} from '../modals'
 
 import {
     useMainStyles,
@@ -20,11 +23,13 @@ import {
 export const Main = ({ opened }: Pick<AppShellComponentsProps, 'opened'>) => {
     const { t } = useTranslation()
     const { classes } = useMainStyles()
-    const [modal, setModal] = useState(false)
+    const [enterRoomModal, setEnterRoomModal] = useState(false)
+    const [createRoomModal, setCreateRoomModal] = useState(false)
 
     return (
         <>
-            <EnterRoomModal opened={modal} onClose={() => setModal(false)} />
+            <EnterRoomModal opened={enterRoomModal} onClose={() => setEnterRoomModal(false)} />
+            <CreateRoomModal opened={createRoomModal} onClose={() => setCreateRoomModal(false)} />
             <div className={classes.main}>
                 <MediaQuery
                     smallerThan="sm"
@@ -40,10 +45,10 @@ export const Main = ({ opened }: Pick<AppShellComponentsProps, 'opened'>) => {
                                     <Button variant="outline">
                                         {t('main.collaborative-game')}
                                     </Button>
-                                    <Button variant="outline">
+                                    <Button variant="outline" onClick={() => setCreateRoomModal(true)}>
                                         {t('main.create-new-game')}
                                     </Button>
-                                    <Button variant="outline" onClick={() => setModal(true)}>
+                                    <Button variant="outline" onClick={() => setEnterRoomModal(true)}>
                                         {t('main.enter-room')}
                                     </Button>
                                 </Stack>
