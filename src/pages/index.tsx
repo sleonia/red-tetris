@@ -8,8 +8,8 @@ import { Main } from '../components/main'
 import { useSocketConnect } from '../hooks'
 
 export default function App () {
-    const theme = useMantineTheme()
     useSocketConnect()
+    const theme = useMantineTheme()
     const [opened, setOpened] = useState(false)
     const handleOpened = () => setOpened(!opened)
 

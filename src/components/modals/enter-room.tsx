@@ -25,7 +25,6 @@ export const EnterRoomModal = ({ opened, onClose }: ModalsProps) => {
     const clipboard = useClipboard({ timeout: 500 })
 
     useEffect(() => {
-        console.log('🚀 ~ file: enter-room.tsx ~ line 26 ~ useEffect ~ toggle', toggle, socket)
         if (toggle) {
             socket.on('joinRoom', (arg) => {
                 if (!arg) {
@@ -48,7 +47,6 @@ export const EnterRoomModal = ({ opened, onClose }: ModalsProps) => {
     const handleClick: MouseEventHandler<HTMLButtonElement> = useCallback((event) => {
         event.preventDefault()
         socket.emit('roomCheck', roomId.value)
-        console.log('🚀 ~ file: enter-room.tsx ~ line 48 ~ consthandleClick:MouseEventHandler<HTMLButtonElement>=useCallback ~ socket', socket)
         setToogle(true)
     }, [roomId.value])
 
