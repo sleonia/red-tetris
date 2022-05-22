@@ -1,15 +1,12 @@
-import { configureStore } from '@reduxjs/toolkit'
-import { createWrapper } from 'next-redux-wrapper'
+import { io } from 'socket.io-client'
+import type { Socket } from 'socket.io-client'
 
-import counterReducer from './counter'
+import type { ClientToServerEvents, ServerToClientEvents } from './socket-events'
 
-export const store = configureStore({
-    reducer: {
-        counter: counterReducer
-    }
-})
+const URL = 'http://localhost:4000'
 
-export const wrapper = createWrapper(() => store)
+export { useAppSelector, useAppDispatch } from './hooks'
+export { store, wrapper } from './store'
+export type { RootState, AppDispatch } from './store'
 
-export type RootState = ReturnType<typeof store.getState>
-export type AppDispatch = typeof store.dispatch
+export const socket: Socket<ClientToServerEvents, ServerToClientEvents> = io(URL, { autoConnect: true })

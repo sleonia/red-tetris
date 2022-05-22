@@ -4,7 +4,7 @@ import { Global } from '@mantine/core'
 import { appWithTranslation, useTranslation } from 'next-i18next'
 import { Provider } from 'react-redux'
 
-import { store, wrapper } from '../__data__'
+import { store, wrapper } from '../__data__/store'
 import { ThemeWrapper } from '../components'
 
 import { GlobalStyles } from './index.styles'

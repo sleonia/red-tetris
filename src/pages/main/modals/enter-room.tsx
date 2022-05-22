@@ -1,23 +1,50 @@
-import { Modal, Input, ActionIcon } from '@mantine/core'
+import { useCallback, useEffect, useState } from 'react'
+import type { ChangeEventHandler, MouseEventHandler } from 'react'
+import { Modal, TextInput, ActionIcon, Button, Stack } from '@mantine/core'
 import { useClipboard } from '@mantine/hooks'
 import { useTranslation } from 'next-i18next'
 import Copy from 'tabler-icons-react/dist/icons/copy'
 import CopyOff from 'tabler-icons-react/dist/icons/copy-off'
-import { useSelector, useDispatch } from 'react-redux'
+
+import { change } from '../../../__data__/slices'
+import { useAppDispatch, useAppSelector, socket } from '../../../__data__'
 
 import type { ModalsProps } from './types'
 
-import { increment, decrement, incrementByAmount } from '../../../__data__/counter'
-
 export const EnterRoomModal = ({ opened, onClose }: ModalsProps) => {
+    const dispatch = useAppDispatch()
+    const roomId = useAppSelector((state) => state.roomId)
+    const [value, setValue] = useState(false)
+    const [error, setError] = useState(false)
+
     const { t } = useTranslation()
     const clipboard = useClipboard({ timeout: 500 })
 
+    useEffect(() => {
+        if (value) {
+            socket.on('joinRoom', (arg) => {
+                if (!arg) {
+                    setError(true)
+                } else {
+                    alert(arg)
+                }
+            })
+            setValue(false)
+        }
+    }, [value])
 
+    const handleChange: ChangeEventHandler<HTMLInputElement> = useCallback((event) => {
+        if (error) {
+            setError(false)
+        }
+        dispatch(change(event.target.value))
+    }, [dispatch, error])
 
-
-    const count = useSelector((state) => state.counter.value)
-    const dispatch = useDispatch()
+    const handleClick: MouseEventHandler<HTMLButtonElement> = useCallback((event) => {
+        event.preventDefault()
+        socket.emit('roomCheck', roomId.value)
+        setValue(true)
+    }, [roomId.value])
 
     return (
         <Modal
@@ -26,32 +53,32 @@ export const EnterRoomModal = ({ opened, onClose }: ModalsProps) => {
             title={t('main.modal.title')}
             centered
         >
-            <Input
-                placeholder={t('main.modal.input.placeholder')}
-                rightSection={(
-                    <ActionIcon
-                        title={t('main.modal.action-icon.copy')}
-                        onClick={() => clipboard.copy('Hello, world!')}
+            <form>
+                <Stack>
+                    <TextInput
+                        placeholder={t('main.modal.input.placeholder')}
+                        value={roomId.value}
+                        error={error ? t('main.modal.error-room') : void 0}
+                        onChange={handleChange}
+                        rightSection={(
+                            <ActionIcon
+                                title={t('main.modal.action-icon.copy')}
+                                onClick={() => clipboard.copy(roomId.value)}
+                            >
+                                {clipboard.copied ? <CopyOff /> : <Copy />}
+                            </ActionIcon>
+                        )}
+                    />
+                    <Button
+                        type="submit"
+                        variant="outline"
+                        disabled={!roomId.value}
+                        onClick={handleClick}
                     >
-                        {clipboard.copied ? <CopyOff /> : <Copy />}
-                    </ActionIcon>
-                )}
-            />
-            <div>
-                <button
-                    aria-label="Increment value"
-                    onClick={() => dispatch(increment())}
-                >
-                    Increment
-                </button>
-                <span>{count}</span>
-                <button
-                    aria-label="Decrement value"
-                    onClick={() => dispatch(decrement())}
-                >
-                    Decrement
-                </button>
-            </div>
+                        {t('main.modal.submit-button')}
+                    </Button>
+                </Stack>
+            </form>
         </Modal>
     )
 }

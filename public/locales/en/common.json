@@ -11,6 +11,8 @@
     "main.modal.title": "Enter your room id",
     "main.modal.input.placeholder": "id",
     "main.modal.action-icon.copy": "Copy id",
+    "main.modal.submit-button": "Join",
+    "main.modal.error-room": "Room with this id doesn't exist",
     "footer.description": "Best tetris game ever",
     "footer.build-by": "Built by Nikita Dontsov",
     "github.me.link": "https://github.com/sleonia",
