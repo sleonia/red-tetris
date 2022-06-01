@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react'
 import { showNotification } from '@mantine/notifications'
 import { useTranslation } from 'next-i18next'
-import CircleCheck from 'tabler-icons-react/dist/icons/circle-check'
-import AlertCircle from 'tabler-icons-react/dist/icons/alert-circle'
+import { AlertCircle, CircleCheck } from 'tabler-icons-react'
 
 import { useSocket } from '../context'
 import { useAppDispatch } from '../__data__'
