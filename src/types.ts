@@ -1,2 +1,1 @@
-// TODO
-export type Piece = unknown
+export type Piece = Array<Array<number>>

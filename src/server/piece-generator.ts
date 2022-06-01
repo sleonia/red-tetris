@@ -1,9 +1,12 @@
+import { rotate90 } from '2d-array-rotation'
+
 import type { Piece } from '../types'
 
 import pieces from './pieces.json'
 
 interface IPieceGenerator {
-    generatePiece: () => unknown
+    getRandom: () => Piece
+    rotate: (piece: Piece) => Piece
 }
 
 export class PieceGenerator implements IPieceGenerator {
@@ -13,8 +16,13 @@ export class PieceGenerator implements IPieceGenerator {
         this.pieces = pieces
     }
 
-    public generatePiece () {
-        this.pieces = []
-        return {}
+    public getRandom () {
+        const index = Math.floor(Math.random() * (this.pieces.length - 1))
+        return this.pieces[index]
+    }
+
+    // eslint-disable-next-line class-methods-use-this
+    public rotate (piece: Piece) {
+        return rotate90(piece) as Piece
     }
 }
