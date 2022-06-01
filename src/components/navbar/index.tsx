@@ -6,8 +6,7 @@ import {
     Text,
     Stack
 } from '@mantine/core'
-import DeviceGamepad from 'tabler-icons-react/dist/icons/device-gamepad'
-import Home from 'tabler-icons-react/dist/icons/home'
+import { DeviceGamepad, Home } from 'tabler-icons-react'
 
 import type { AppShellComponentsProps } from '../types'
 
