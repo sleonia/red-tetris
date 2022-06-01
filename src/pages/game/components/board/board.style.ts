@@ -1,3 +1,4 @@
+import get from 'lodash.get'
 import { createStyles } from '@mantine/core'
 
 const BORDER_WIDTH = 2
@@ -21,5 +22,9 @@ export const useBoardStyles = createStyles((theme) => ({
             backgroundColor: theme.colors.gray[3],
             border: `1px solid ${theme.colors.dark[5]}`
         }
+    },
+    colored: {
+        // FIXME большооооой костыль
+        backgroundColor: `${get(theme.colors, 'cyan[6]')} !important`
     }
 }))
