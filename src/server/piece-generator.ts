@@ -23,6 +23,6 @@ export class PieceGenerator implements IPieceGenerator {
 
     // eslint-disable-next-line class-methods-use-this
     public rotate (piece: Piece) {
-        return rotate90(piece) as Piece
+        return rotate90(piece)
     }
 }
