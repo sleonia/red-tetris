@@ -1,10 +1,10 @@
 import get from 'lodash.get'
 import { createStyles } from '@mantine/core'
 
+import { PLAYGROUND_WIDTH, PLAYGROUND_HEIGHT } from './../../../../constants'
+
 const BORDER_WIDTH = 2
 
-export const PLAYGROUND_WIDTH = 10
-export const PLAYGROUND_HEIGHT = 20
 export const BOARD_WIDTH = PLAYGROUND_WIDTH + BORDER_WIDTH
 export const BOARD_HEIGHT = PLAYGROUND_HEIGHT + BORDER_WIDTH
 

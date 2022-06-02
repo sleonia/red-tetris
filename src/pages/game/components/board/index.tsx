@@ -1,7 +1,9 @@
 import { useState, useMemo } from 'react'
 import { Group, Button } from '@mantine/core'
+
 // FIXME только для проверки отрисовки
 import { PieceGenerator } from '../../../../server/piece-generator'
+import { useSocket } from '../../../../context'
 
 import {
     useBoardStyles,
@@ -13,7 +15,8 @@ const p = new PieceGenerator()
 
 export const Board = () => {
     const [state, setState] = useState(p.getRandom())
-    console.log('🚀 ~ file: index.tsx ~ line 16 ~ Board ~ state', state)
+    const socket = useSocket()
+    console.log('🚀 ~ file: index.tsx ~ line 19 ~ Board ~ socket', socket.id)
 
     const { classes } = useBoardStyles()
 
@@ -25,7 +28,6 @@ export const Board = () => {
             .map((_, index) => <div key={index} />)
 
         state.forEach((col, colIndex) => {
-            console.log('🚀 ~ file: index.tsx ~ line 27 ~ state.forEach ~ colIndex', col, colIndex)
             col.forEach((cell, cellIndex) => {
                 if (cell !== 0) {
                     tmp[(colIndex * BOARD_WIDTH) + cellIndex] = <div className={classes.colored} />
@@ -39,8 +41,8 @@ export const Board = () => {
     return (
         <>
             <Group>
-                <Button onClick={() => setState(p.getRandom())}>Generate!</Button>
-                <Button onClick={() => setState(p.rotate(state))}>Rotate!</Button>
+                <Button onClick={() => socket.emit('startGame')}>Start</Button>
+                <Button onClick={() => socket.emit('pauseGame')}>Pause</Button>
             </Group>
             <div className={classes.frame}>
                 {cells}

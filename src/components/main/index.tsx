@@ -6,7 +6,7 @@ import {
     Stack
 } from '@mantine/core'
 import { useTranslation } from 'next-i18next'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import type { AppShellComponentsProps } from '../types'
 import {
@@ -20,11 +20,23 @@ import {
     largerSmPaper
 } from './main.styles'
 
+import { useSocket } from '../../context'
+import Router from 'next/router'
+
 export const Main = ({ opened }: Pick<AppShellComponentsProps, 'opened'>) => {
     const { t } = useTranslation()
     const { classes } = useMainStyles()
     const [enterRoomModal, setEnterRoomModal] = useState(false)
     const [createRoomModal, setCreateRoomModal] = useState(false)
+    
+    const socket = useSocket()
+
+    useEffect(() => {
+        socket.on('newGame', (roomId) => {
+            console.log('🚀 ~ file: index.tsx ~ line 36 ~ socket.on ~ roomId', roomId)
+            Router.push('/game')
+        })
+    }, [])
 
     return (
         <>
@@ -39,7 +51,9 @@ export const Main = ({ opened }: Pick<AppShellComponentsProps, 'opened'>) => {
                         <Paper className={classes.paper} shadow="lg" radius="md" p="md" withBorder>
                             <Center className={classes.center}>
                                 <Stack>
-                                    <Button variant="outline">
+                                    <Button variant="outline" onClick={() => {
+                                        socket.emit('newGame')
+                                    }}>
                                         {t('main.solo-game')}
                                     </Button>
                                     <Button variant="outline">

@@ -43,7 +43,8 @@ module.exports = {
                 '@typescript-eslint/no-confusing-void-expression': 'off',
                 'react/jsx-no-bind': 'off',
                 'react/forbid-component-props': 'off',
-                '@sbol/common/no-package-json-imports': 'off'
+                '@sbol/common/no-package-json-imports': 'off',
+                'class-methods-use-this': 'off'
             }
         },
         {
